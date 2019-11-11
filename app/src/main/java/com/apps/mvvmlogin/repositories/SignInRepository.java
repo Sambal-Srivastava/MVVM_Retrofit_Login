@@ -4,7 +4,7 @@ import android.app.Application;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.apps.mvvmlogin.api_inputs.SignInInputs;
+
 import com.apps.mvvmlogin.response.SignInResponse;
 import com.apps.mvvmlogin.retrofit.Api;
 import com.apps.mvvmlogin.retrofit.ApiInterface;
@@ -24,8 +24,7 @@ public class SignInRepository {
         final MutableLiveData<SignInResponse> mutableLiveData = new MutableLiveData<>();
 
         ApiInterface apiInterface = Api.getClient().create(ApiInterface.class);
-        SignInInputs input = new SignInInputs(email, password, device_type, device_token);
-        Call<SignInResponse> call = apiInterface.getResponse(input);
+        Call<SignInResponse> call = apiInterface.getResponse(email, password, device_type, device_token);
         call.enqueue(new Callback<SignInResponse>() {
             @Override
             public void onResponse(Call<SignInResponse> call, Response<SignInResponse> response) {

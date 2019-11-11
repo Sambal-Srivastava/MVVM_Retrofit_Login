@@ -33,17 +33,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!TextUtils.isEmpty(email_et.getText().toString())&& !TextUtils.isEmpty(password_et.getText().toString())){
-                    SignInApiCall();
+                    SignInApiCall(email_et.getText().toString(),password_et.getText().toString());
                 }
-
                 else
                     Toast.makeText(MainActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void SignInApiCall() {
-        signInViewModel.getResponse("nn@yopmail.com", "123456", "1", "q213131").observe(this, new Observer<SignInResponse>() {
+    private void SignInApiCall(String email, String password) {
+        signInViewModel.getResponse(email, password, "1", "q213131").observe(this, new Observer<SignInResponse>() {
             @Override
             public void onChanged(SignInResponse signInResponse) {
                 String status = signInResponse.getStatus();
